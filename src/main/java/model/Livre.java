@@ -1,8 +1,11 @@
 package model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,12 +21,16 @@ public class Livre {
 	private int id;
 	
 	/** titre : String */
-	//@Column(name = "TITRE", length = 255)
+	@Column(name = "TITRE", length = 255)
 	private String titre;
 	
 	/** auteur : String */
-	//@Column(name = "AUTEUR", length = 50)
+	@Column(name = "AUTEUR", length = 50)
 	private String auteur;
+	
+	/** emprunts : List<Emprunt> */
+	@ManyToMany(mappedBy="livres")
+	private List<Emprunt> emprunts;
 
 	/** Constructor
 	 * 
@@ -72,6 +79,20 @@ public class Livre {
 	 */
 	public void setAuteur(String auteur) {
 		this.auteur = auteur;
+	}
+
+	/** Getter
+	 * @return the emprunts
+	 */
+	public List<Emprunt> getEmprunts() {
+		return emprunts;
+	}
+
+	/** Setter
+	 * @param emprunts the emprunts to set
+	 */
+	public void setEmprunts(List<Emprunt> emprunts) {
+		this.emprunts = emprunts;
 	}
 
 }
