@@ -3,6 +3,7 @@
  */
 package banque.entite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -30,13 +31,17 @@ public class Banque {
 	
 	/** clients : List<Client> */
 	@OneToMany(mappedBy = "banque")
-	private List<Client> clients;
+	private List<Client> clients = new ArrayList<>();
 
 	/** Constructor
 	 * 
 	 */
 	public Banque() {
 		// Constructeur vide
+	}
+	
+	public Banque(String nom) {
+		this.nom = nom;
 	}
 
 	/** Getter

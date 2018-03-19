@@ -1,5 +1,6 @@
 package banque.entite;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
@@ -9,30 +10,34 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Adresse {
 	
-	/** id : int */
-	private int id;
-	
 	/** numero : int */
+	@Column(name = "NUMERO")
 	private int numero;
 	
 	/** rue : String */
+	@Column(name = "RUE")
 	private String rue;
 	
 	/** codePostal : int */
+	@Column(name = "CODEPOSTAL")
 	private int codePostal;
 	
 	/** ville : String */
+	@Column(name = "VILLE")
 	private String ville;
 	
+	/** Constructor
+	 * 
+	 */
 	public Adresse() {
 		// Constructeur vide
 	}
-
-	/** Getter
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
+	
+	public Adresse(int numero, String rue, int codePostal, String ville) {
+		this.numero = numero;
+		this.rue = rue;
+		this.ville = ville;
+		this.codePostal = codePostal;
 	}
 
 	/** Getter
@@ -61,13 +66,6 @@ public class Adresse {
 	 */
 	public String getVille() {
 		return ville;
-	}
-
-	/** Setter
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	/** Setter
