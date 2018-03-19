@@ -3,7 +3,6 @@
  */
 package banque.console;
 
-import java.time.LocalDate;
 import java.util.Random;
 
 import javax.persistence.EntityManager;
@@ -16,8 +15,8 @@ import org.slf4j.LoggerFactory;
 import banque.entite.Adresse;
 import banque.entite.Banque;
 import banque.entite.Client;
-import banque.entite.Compte;
-import banque.entite.Operation;
+import banque.entite.LivretA;
+import banque.entite.Virement;
 import banque.utils.RandomGenerator;
 
 /**
@@ -38,8 +37,8 @@ public class TestConsole {
 
 		em.getTransaction().begin();
 		
-		Compte compte = new Compte();
-		Operation operation;
+		LivretA compte = new LivretA();
+		Virement virement;
 		Adresse adresse;
 		Client client;
 		Banque b1 = new Banque("Crédit Agricole");
@@ -59,31 +58,26 @@ public class TestConsole {
 			
 			if(i%2 == 1) {
 				
-				compte = new Compte(r.nextInt(50000), r.nextInt(10000));
+				compte = new LivretA(r.nextInt(50000), 100d, 10.0);
 				
 				int random = r.nextInt(10);
 				
 				for(int j = 0; j < random; j++) {
 					
-					operation = new Operation(r.nextInt(1000), "Un motif");
+					virement = new Virement(r.nextInt(1000), "Un motif", "Un bénéficiaire");
 
-					operation.setCompte(compte);
+					virement.setCompte(compte);
 					
-					em.persist(operation);
+					em.persist(virement);
 											
 				}
 				
 			}
 			
 			client.getComptes().add(compte);
-			
-			LOGGER.info("Ajout du client " + i);
-			
 			em.persist(compte);
 			em.persist(client);
 		}
-
-		LOGGER.info("Commit");
 		
 		em.getTransaction().commit();
 		
